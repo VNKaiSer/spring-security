@@ -24,18 +24,18 @@ public class SecurityConfig {
         auth.jdbcAuthentication()
                 .dataSource(dataSource)
                 .withDefaultSchema()
-                .withUser(User.withUsername("admin")
-                        .password(encoder.encode("admin"))
-                        .roles("ADMIN")
-                        .build())
-                .withUser(User.withUsername("teo")
-                        .password(encoder.encode("teo"))
-                        .roles("TEO")
-                        .build())
-                .withUser(User.withUsername("ty")
-                        .password(encoder.encode("ty"))
-                        .roles("USER")
-                        .build())
+//                .withUser(User.withUsername("admin")
+//                        .password(encoder.encode("admin"))
+//                        .roles("ADMIN")
+//                        .build())
+//                .withUser(User.withUsername("teo")
+//                        .password(encoder.encode("teo"))
+//                        .roles("TEO")
+//                        .build())
+//                .withUser(User.withUsername("ty")
+//                        .password(encoder.encode("ty"))
+//                        .roles("USER")
+//                        .build())
         ;
     }
     @Bean
@@ -45,6 +45,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/**").hasAnyRole("ADMIN","USER","TEO")//nhung uri bat dau bang /api can phai dang nhap voi cac role admin/user/teo
                         .requestMatchers("/h2-console/**").hasRole("ADMIN")
                         .requestMatchers(("/admin/**")).hasRole("ADMIN")//uri bat dau bang admin thi phai dang nhap voi quyen admin
+                        .requestMatchers(("/addUser/**")).hasRole("ADMIN")
                         .anyRequest().permitAll()
                 //.authenticated()//cac uri khac can dang nhap duoi bat ky ole nao
         );
